@@ -19,45 +19,51 @@ fun menuCreacion () =
         opt
     end;
 
-
-
 fun nuevoRegistro() = 
-
     let 
         val doc = TextIO.openAppend "matricula.csv"
-        val _ = print "=== Agregando matricula ===\n";
+        val _ = print "=== Agregando matricula ===\n"
 
-        val _ = print "Ingrese el carnet del estudiante\n";
-        val SOME carnet = TextIO.inputLine(TextIO.stdIn)
-        val carnet = limpiarStr carnet
+        val _ = print "Ingrese el carnet del estudiante\n"
+        val SOME carnetIn = TextIO.inputLine TextIO.stdIn
+        val carnet = limpiarStr carnetIn
 
-        val _ = print "Ingrese el nombre del estudiante\n";
-        val SOME nombre = TextIO.inputLine(TextIO.stdIn)
-        val nombre = limpiarStr nombre
+        val _ = print "Ingrese el nombre del estudiante\n"
+        val SOME nombreIn = TextIO.inputLine TextIO.stdIn
+        val nombre = limpiarStr nombreIn
 
-        val _ = print "Ingrese el código del curso\n";
-        val SOME codigo = TextIO.inputLine(TextIO.stdIn)
-        val codigo = limpiarStr codigo
+        val _ = print "Ingrese el código del curso\n"
+        val SOME codigoIn = TextIO.inputLine TextIO.stdIn
+        val codigo = limpiarStr codigoIn
 
-        val _ = print "Ingrese la cantidad de creditos\n";
-        val SOME creditos = TextIO.inputLine(TextIO.stdIn)
-        val creditos = limpiarStr creditos
+        val _ = print "Ingrese la cantidad de creditos\n"
+        val SOME creditosIn = TextIO.inputLine TextIO.stdIn
+        val creditosStr = limpiarStr creditosIn
 
-        val _ = print "Ingrese el costo por creditos\n";
-        val SOME costo = TextIO.inputLine(TextIO.stdIn)
-        val costo = limpiarStr costo
+        val _ = print "Ingrese el costo por creditos\n"
+        val SOME costoIn = TextIO.inputLine TextIO.stdIn
+        val costoStr = limpiarStr costoIn
 
-        val linea = carnet ^ "," ^ nombre ^ "," ^ codigo ^ "," ^ creditos ^ "," ^ costo ^ "\n"
-
-        val _ = TextIO.output(doc, linea)
-
-        val _ = TextIO.closeOut doc
+        val creditosOpt = Int.fromString creditosStr
+        val costoOpt = Real.fromString costoStr
     in 
-        ()
+        case (creditosOpt, costoOpt) of
+            (SOME creditos, SOME costo) =>
+                let
+                    val linea =
+                        carnet ^ "," ^ nombre ^ "," ^ codigo ^ "," ^
+                        Int.toString creditos ^ "," ^
+                        Real.toString costo ^ "\n"
+
+                    val _ = TextIO.output(doc, linea)
+                    val _ = TextIO.closeOut doc
+                in
+                    print "Registro agregado correctamente\n"
+                end
+          | _ =>
+                (TextIO.closeOut doc;
+                 print "Error: creditos o costo inválidos\n")
     end;
-
-
-
 
 fun main() = 
     case menuCreacion () of
