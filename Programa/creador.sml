@@ -32,7 +32,7 @@ fun nuevoRegistro() =
         val SOME nombreIn = TextIO.inputLine TextIO.stdIn
         val nombre = limpiarStr nombreIn
 
-        val _ = print "Ingrese el código del curso\n"
+        val _ = print "Ingrese el codigo del curso\n"
         val SOME codigoIn = TextIO.inputLine TextIO.stdIn
         val codigo = limpiarStr codigoIn
 
@@ -64,6 +64,30 @@ fun nuevoRegistro() =
                 (TextIO.closeOut doc;
                  print "Error: creditos o costo inválidos\n")
     end;
+
+fun limpiarRegistro () =
+    let
+        val _ = print "Esto eliminará todas las matrículas\n"
+        val _ = print "¿Desea continuar? (s/n)\n"
+        val SOME respIn = TextIO.inputLine TextIO.stdIn
+        val resp = limpiarStr respIn
+    in
+        if resp = "s" orelse resp = "S" then
+            let
+                val doc = TextIO.openOut "matricula.csv"
+
+                val encabezado =
+                    "carnet_estudiante,nombre,curso,creditos,costo_credito\n"
+
+                val _ = TextIO.output(doc, encabezado)
+                val _ = TextIO.closeOut doc
+            in
+                print "Catálogo limpiado correctamente\n"
+            end
+        else
+            print "Operación cancelada\n"
+    end;
+
 
 fun main() = 
     case menuCreacion () of
