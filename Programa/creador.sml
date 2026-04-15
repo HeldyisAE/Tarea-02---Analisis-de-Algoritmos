@@ -91,10 +91,10 @@ fun limpiarRegistro () =
 
 fun main() = 
     case menuCreacion () of
-         "1" => nuevoRegistro()
-      |  "2" => print "Elegiste limpiar\n"
+         "1" => (nuevoRegistro(); main())
+      |  "2" => (limpiarRegistro(); main())
       |  "0" => print "Saliendo...\n"
-      |   _  => print "Opción inválida\n"
+      |   _  => (print "Opción inválida\n"; main());
 
 val _ = main();
 
