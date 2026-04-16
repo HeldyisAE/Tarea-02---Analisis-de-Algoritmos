@@ -100,8 +100,8 @@ fun nuevoRegistro() =
 *)
 fun limpiarRegistro () =
     let
-        val _ = print "Esto eliminará todas las matrículas\n"
-        val _ = print "¿Desea continuar? (s/n)\n"
+        val _ = print "Esto eliminara todas las matriculas\n"
+        val _ = print "Desea continuar? (s/n)\n"
         val SOME respIn = TextIO.inputLine TextIO.stdIn
         val resp = limpiarStr respIn
     in
@@ -115,10 +115,10 @@ fun limpiarRegistro () =
                 val _ = TextIO.output(doc, encabezado)
                 val _ = TextIO.closeOut doc
             in
-                print "Catálogo limpiado correctamente\n"
+                print "Catalogo limpiado correctamente\n"
             end
         else
-            print "Operación cancelada\n"
+            print "Operacion cancelada\n"
     end;
 
 (*
@@ -136,7 +136,7 @@ fun main() =
          "1" => (nuevoRegistro(); main())
       |  "2" => (limpiarRegistro(); main())
       |  "0" => print "Saliendo...\n"
-      |   _  => (print "Opción inválida\n"; main());
+      |   _  => (print "Opcion invalida\n"; main());
 
 val _ = main();
 

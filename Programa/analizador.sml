@@ -16,9 +16,9 @@ fun menuAnalizador () =
     let
         val _ = print "=== Bienvenido al Menu del Analizador ===\n"
         val _ = print "1. Cursos con mayor ingreso\n"
-        val _ = print "2. Cursos con más de 5 estudiantes\n"
-        val _ = print "3. Buscar matrículas por estudiante\n"
-        val _ = print "4. Cursos por cantidad de créditos\n"
+        val _ = print "2. Cursos con mas de 5 estudiantes\n"
+        val _ = print "3. Buscar matriculas por estudiante\n"
+        val _ = print "4. Cursos por cantidad de creditos\n"
         val _ = print "5. Resumen general del sistema\n"
         val _ = print "0. Salir\n"
 
@@ -28,8 +28,7 @@ fun menuAnalizador () =
         opt
     end;
 
-fun mayorIngreso () = 
-
+fun mayorIngreso () = ()
 
 fun mainAnalizador ruta =
     case menuAnalizador () of
@@ -39,4 +38,6 @@ fun mainAnalizador ruta =
       |  "4" => print "Cantidad de curso por creditos"
       |  "5" => print "Resumen general"
       |  "0" => print "Saliendo...\n"
-      |   _  => (print "Opción inválida\n"; mainAnalizador ruta);
+      |   _  => (print "Opcion invalida\n"; mainAnalizador ruta);
+
+val _ = mainAnalizador("C:/Users/heldy/Desktop/TC2/Programa/matricula.csv");
